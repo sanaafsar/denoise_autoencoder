@@ -52,6 +52,16 @@ from auto_encoder import add_noise
 test_clean = np.reshape(testX / 255, (10000, 28, 28, 1))
 test_noisy = np.reshape([add_noise(img / 255) for img in testX], (10000, 28, 28, 1))
 
+offset = 92
+print("Noisy test images")
+for i in range(9):
+    plt.subplot(330 + 1 + i)
+    plt.imshow(test_noisy[i + offset, :, :, -1], cmap='gray')
+#plt.show()
+plt.savefig('noisy_samples_1.png')
+plt.clf()
+
+
 # ─────────────────────────────────────────────
 # OPTION 1: Load entire model (Recommended)
 # ─────────────────────────────────────────────
@@ -61,13 +71,14 @@ print("Model loaded successfully!")
 
 # Test on some examples
 print("\nDenoising samples...")
-offset = 50
+offset = 92
 for i in range(9):
     plt.subplot(330 + 1 + i)
     output = autoencoder.predict(np.array([test_noisy[i + offset]]))
     denoised = np.reshape(output[0] * 255, (28, 28))
     plt.imshow(denoised, cmap='gray')
-plt.savefig('denoised_results.png')
+plt.savefig('denoised_results_1.png')
+plt.clf()
 print("Results saved to 'denoised_results.png'")
 
 # ─────────────────────────────────────────────

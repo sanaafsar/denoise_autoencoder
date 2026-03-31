@@ -38,6 +38,7 @@ for j in range(5):
     plt.title(trainy[i])
 #plt.show()
 plt.savefig('sample_images.png')
+plt.clf()
 
 
 # ─────────────────────────────────────────────
@@ -108,8 +109,9 @@ for j in range(9):
     plt.imshow(noisy, cmap='gray')
 #plt.show()
 plt.savefig('corrupted_samples.png')
+plt.clf()
 
-
+        
 # ─────────────────────────────────────────────
 # 4. DATA PREPARATION
 # ─────────────────────────────────────────────
@@ -180,6 +182,7 @@ for i in range(9):
     plt.imshow(test_noisy[i + offset, :, :, -1], cmap='gray')
 #plt.show()
 plt.savefig('noisy_samples.png')
+plt.clf()
 
 print("Cleaned Version (Denoising Autoencoder) :)")
 for i in range(9):
@@ -187,8 +190,9 @@ for i in range(9):
     output = autoencoder.predict(np.array([test_noisy[i + offset]]))
     op_image = np.reshape(output[0] * 255, (28, 28))
     plt.imshow(op_image, cmap='gray')
-plt.savefig('denoised_samples.png')
 #plt.show()
+plt.savefig('denoised_samples.png')
+plt.clf()
 
 
 # ─────────────────────────────────────────────
