@@ -8,43 +8,9 @@ import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-import tensorflow
 from tensorflow.keras.datasets import mnist
-from auto_encoder import add_noise
-
-# def add_noise(image):
-#     """Add random noise to an image"""
-#     p = np.random.random()
-#     if p <= 0.25:
-#         # Gaussian noise
-#         r, c = image.shape
-#         mean = 0
-#         var = 0.1
-#         sigma = var ** 0.5
-#         gaussian = np.random.normal(mean, sigma, (r, c))
-#         noisy = image + gaussian
-#     elif p <= 0.5:
-#         # Salt and pepper
-#         ratio = 0.9
-#         amount = 0.1
-#         noisy = np.copy(image)
-#         salt_count = np.ceil(amount * image.size * ratio)
-#         coords = [np.random.randint(0, i - 1, int(salt_count)) for i in image.shape]
-#         noisy[coords] = 1
-#         pepper_count = np.ceil(amount * image.size * (1. - ratio))
-#         coords = [np.random.randint(0, i - 1, int(pepper_count)) for i in image.shape]
-#         noisy[coords] = 0
-#     elif p <= 0.75:
-#         # Poisson
-#         vals = len(np.unique(image))
-#         vals = 2 ** np.ceil(np.log2(vals))
-#         noisy = np.random.poisson(image * vals) / float(vals)
-#     else:
-#         # Speckle
-#         r, c = image.shape
-#         speckle = np.random.randn(r, c)
-#         noisy = image + image * speckle
-#     return noisy
+from noise_functions import add_noise
+from model import load_model
 
 
 # Load test data
@@ -66,7 +32,7 @@ plt.clf()
 # OPTION 1: Load entire model (Recommended)
 # ─────────────────────────────────────────────
 print("Loading model...")
-autoencoder = tensorflow.keras.models.load_model('autoencoder_model.h5')
+autoencoder = load_model('autoencoder_model.h5')
 print("Model loaded successfully!")
 
 # Test on some examples
